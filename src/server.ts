@@ -1,8 +1,12 @@
+import http from 'http';
+
 import  { WebSocket,WebSocketServer } from "ws"
 import { v4 as uuidv4 } from "uuid"
 import { MessageType, Room } from "./types"
 const PORT = 8080
-const wss = new WebSocketServer({port:PORT})
+
+const server = http.createServer()
+const wss = new WebSocketServer({server:server})
 
 const users = new Map()
 const connections = new Map()
@@ -214,4 +218,6 @@ wss.on("connection", (ws: WebSocket)=>{
     }
 })
 
-console.log(`WebSocket server is running on port ${PORT}`)
+server.listen(PORT, () => {
+    console.log(`WebSocket server is running on port ${PORT}`);
+  });
