@@ -3,7 +3,7 @@ import http from 'http';
 import  { WebSocket,WebSocketServer } from "ws"
 import { v4 as uuidv4 } from "uuid"
 import { MessageType, Room } from "./types"
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 
 const server = http.createServer()
 const wss = new WebSocketServer({server:server})
